@@ -20,11 +20,18 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 MIN=${MIN:-1}
+
 if [ -z "$1" ]; then
-	INPUT=/dev/stdin
+	if [ -t 0 ]; then
+		echo "No file or pipe to read"
+		exit 1
+	else
+		INPUT=/dev/stdin
+	fi
 else
 	INPUT=$1
 fi
+
 # Associative array with the title as index and the number of items as the value
 declare -A titles
 
