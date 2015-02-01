@@ -20,6 +20,11 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 MIN=${MIN:-1}
+if [ -z "$1" ]; then
+	INPUT=/dev/stdin
+else
+	INPUT=$1
+fi
 # Associative array with the title as index and the number of items as the value
 declare -A titles
 
@@ -38,7 +43,8 @@ do
 		title=$line
 		titles[${title}]=$i
 	fi
-done < titles.csv
+
+done < $INPUT
 
 # Looping through titles and print how many items there is
 for key in "${!titles[@]}"; do
