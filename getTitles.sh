@@ -49,6 +49,6 @@ done < $INPUT
 # Looping through titles and print how many items there is
 for key in "${!titles[@]}"; do
 	if [ ${titles[$key]} -ge $MIN ]; then
-		echo "${key}; ${titles[$key]}"
+		echo "${key};${titles[$key]}"
 	fi
 done
