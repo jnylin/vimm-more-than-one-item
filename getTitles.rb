@@ -23,11 +23,9 @@ require 'optparse'
 
 options = {}
 OptionParser.new do |opts|
-
 	opts.on("--min [MIN]", "Minimun number of copies for showing the title" ) do |m|
 		options[:min] = m.to_i
 	end
-
 end.parse!
 
 input = ARGF.read
