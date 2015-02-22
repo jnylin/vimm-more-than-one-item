@@ -32,11 +32,10 @@ end.parse!
 
 input = ARGF.read
 titles = Hash.new
-
 i = 0
 title = ""
-input.each_line do |line|
 
+input.each_line do |line|
 	if i == 0
 		title = line
 	end
@@ -49,7 +48,6 @@ input.each_line do |line|
 		title = line
 		titles[title] = i
 	end
-
 end
 
 titles.each do |key,value|
