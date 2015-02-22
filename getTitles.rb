@@ -19,6 +19,17 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+
+	opts.on("--min [MIN]", "Minimun number of copies for showing the title" ) do |m|
+		options[:min] = m.to_i
+	end
+
+end.parse!
+
 input = ARGF.read
 titles = Hash.new
 
@@ -42,5 +53,7 @@ input.each_line do |line|
 end
 
 titles.each do |key,value|
-	puts "#{key.strip};#{value}"
+	if value >= options[:min]
+		puts "#{key.strip};#{value}"
+	end
 end

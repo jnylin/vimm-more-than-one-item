@@ -32,7 +32,7 @@ else
 	INPUT=$1
 fi
 
-cat $INPUT | iconv -f iso-8859-1 -t utf-8 | cut -d";" -f 2 | sort | ./getTitles.rb | grep -v ";[0-$(($MIN-1))]" | sort
+cat $INPUT | iconv -f iso-8859-1 -t utf-8 | cut -d";" -f 2 | sort | ./getTitles.rb --min $MIN
 
 
 
