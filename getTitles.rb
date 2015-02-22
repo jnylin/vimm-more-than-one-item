@@ -39,7 +39,6 @@ input.each_line do |line|
 		titles[title] = i
 	end
 
-
 end
 
 titles.each do |key,value|
