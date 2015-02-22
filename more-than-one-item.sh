@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/bin/bash
 # Copyright 2015 Jakob Nylin (jakob [dot] nylin [at] gmail [dot] com)
 # All rights reserved.
 #
@@ -19,29 +19,20 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-input = ARGF.read
-titles = Hash.new
+MIN=${MIN:-1}
 
-i = 0
-title = ""
-input.each_line do |line|
-
-	if i == 0
-		title = line
-	end
-
-	if title == line
-		i += 1
-		titles[title] = i
+if [ -z "$1" ]; then
+	if [ -t 0 ]; then
+		echo "No file or pipe to read"
+		exit 1
 	else
-		i = 1
-		title = line
-		titles[title] = i
-	end
+		INPUT=/dev/stdin
+	fi
+else
+	INPUT=$1
+fi
+
+cat $INPUT | iconv -f iso-8859-1 -t utf-8 | cut -d";" -f 2 | sort | ./getTitles.rb | grep -v ";[0-$(($MIN-1))]" | sort
 
 
-end
 
-titles.each do |key,value|
-	puts "#{key.strip};#{value}"
-end
